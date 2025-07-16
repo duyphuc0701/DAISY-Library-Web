@@ -1,48 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>My Book Site</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="top-bar">
-      <div class="logo">
-        <!-- replace with your logo -->
-        <img src="logo.png" alt="Site Logo">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>My Book Site</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="top-bar">
+        <div class="logo">
+          <!-- replace with your logo -->
+          <img src="logo.png" alt="Site Logo" />
+        </div>
+        <div class="search">
+          <input type="text" placeholder="Nhập nội dung tìm kiếm…" />
+          <button><span class="icon-search">🔍</span></button>
+        </div>
       </div>
-      <div class="search">
-        <input type="text" placeholder="Nhập nội dung tìm kiếm…">
-        <button><span class="icon-search">🔍</span></button>
-      </div>
-    </div>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="#">Trang chủ</a></li>
-        <li class="dropdown">
-          <a href="#" id="categoryToggle">Thể loại sách ▾</a>
-          <ul class="dropdown-menu" id="categoryMenu">
-            <li><a href="#">Tiểu thuyết</a></li>
-            <li><a href="#">Khoa học</a></li>
-            <li><a href="#">Lịch sử</a></li>
-            <li><a href="#">Thiếu nhi</a></li>
-            <li><a href="#">Nghệ thuật</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </header>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="#">Trang chủ</a></li>
+          <li class="dropdown">
+            <a href="#" id="categoryToggle">Thể loại sách ▾</a>
+            <ul class="dropdown-menu" id="categoryMenu">
+              <li><a href="#">Tiểu thuyết</a></li>
+              <li><a href="#">Khoa học</a></li>
+              <li><a href="#">Lịch sử</a></li>
+              <li><a href="#">Thiếu nhi</a></li>
+              <li><a href="#">Nghệ thuật</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-  <!-- MAIN CONTENT -->
-  <main>
-    <h1>Welcome to My Book Site</h1>
-    <p>…your content here…</p>
-  </main>
+    <!-- MAIN CONTENT -->
+    <main>
+      <h1>Welcome to My Book Site</h1>
+      <div
+        id="book-list"
+        style="
+          display: flex;
+          flex-wrap: wrap;
+          gap: 20px;
+          justify-content: center;
+        "
+      ></div>
+    </main>
 
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
