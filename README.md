@@ -1,0 +1,1 @@
+Em có tạo mảng trong script rồi mà ko biết đúng không, chức năng chọn thể loại thì em có test thử thì chạy đc ạ.
