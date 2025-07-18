@@ -16,8 +16,11 @@
         <img src="logo.png" alt="Site Logo">
       </div>
       <div class="search">
-        <input type="text" placeholder="Nhập nội dung tìm kiếm…">
-        <button><span class="icon-search">🔍</span></button>
+          <input type="text" id="searchInput" placeholder="Nhập nội dung tìm kiếm…">
+          <button id="searchButton">
+              <span class="icon-search">🔍</span>
+              <div id="loadingIndicator" class="loading-spinner" style="display: none;"></div>
+          </button>
       </div>
     </div>
     <nav class="main-nav">
@@ -41,8 +44,14 @@
   <main>
     <h1>Welcome to My Book Site</h1>
     <p>…your content here…</p>
-  </main>
+    <div id="bookList" class="book-grid">
+    </div>
 
+    <div id="noResultsMessage" class="no-results" style="display: none;">
+      Không có kết quả tìm kiếm.
+    </div>
+  </main>
+  <script src="books.json"></script>
   <script src="script.js"></script>
 </body>
 </html>

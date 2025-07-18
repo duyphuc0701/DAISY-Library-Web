@@ -1,0 +1,1 @@
+Search UI display (icon search: magnifying glass) error overwrite loading-spinner not fixed
