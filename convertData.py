@@ -39,19 +39,17 @@ def excel_to_json(excel_file_path, json_file_path="Books.json", sheet_name=0, co
         'publisher': 'publisher',
         'year': 'year',
         'category': 'category',
-        'google drive URL': 'google drive URL'
+        'google_drive_URL': 'google_drive_URL'
     }
     if column_mapping is None:
         column_mapping = default_column_mapping
 
-    # Kiểm tra xem tất cả các cột có tồn tại trong DataFrame không
     missing_columns = [col_excel for col_excel, col_json in column_mapping.items() if col_excel not in df.columns]
     if missing_columns:
         print(f"Lỗi: Các cột sau không tìm thấy trong file Excel: {', '.join(missing_columns)}. "
               f"Vui lòng kiểm tra lại tên cột trong file Excel hoặc mapping.")
         return False
 
-    # Ánh xạ và chỉ giữ lại các cột cần thiết cho JSON
     df_mapped = df.rename(columns=column_mapping)
     json_fields = list(column_mapping.values())
     df_final = df_mapped[json_fields].copy() 
@@ -95,7 +93,7 @@ if __name__ == "__main__":
         'publisher': 'publisher',
         'year': 'year',
         'category': 'category',
-        'google drive URL': 'google drive URL'
+        'google_drive_URL': 'google_drive_URL'
     }
 
     success = excel_to_json(excel_input_file, json_output_file, column_mapping=column_map)
