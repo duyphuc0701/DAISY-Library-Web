@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>My Book Site</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="top-bar">
+      <div class="logo">
+        <!-- replace with your logo -->
+        <img src="logo.png" alt="Site Logo">
+      </div>
+      <div class="search">
+        <input type="text" placeholder="Nhập nội dung tìm kiếm…">
+        <button><span class="icon-search">🔍</span></button>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#">Trang chủ</a></li>
+        <li class="dropdown">
+          <a href="#" id="categoryToggle">Thể loại sách ▾</a>
+          <ul class="dropdown-menu" id="categoryMenu">
+            <li><a href="#">Tiểu thuyết</a></li>
+            <li><a href="#">Khoa học</a></li>
+            <li><a href="#">Lịch sử</a></li>
+            <li><a href="#">Thiếu nhi</a></li>
+            <li><a href="#">Nghệ thuật</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- Title list -->
+    <section aria-label="Danh sách sách thư viện DAISY">
+      <h1 class="list-title">Thư viện sách DAISY</h1>
+      <div id="bookGrid" class="book-grid"></div>
+    </section>
+
+    <!-- BookCard (ẩn) -->
+    <template id="bookCardTemplate">
+      <article class="book-card" aria-labelledby="book-title">
+        <div class="book-cover-wrapper">
+          <img src="" alt="" class="book-cover">
+        </div>
+        <div class="book-content">
+          <p class="book-category"></p>
+          <h2 class="book-title"><a href="" class="book-title-link"></a></h2>
+          <p class="book-author"></p>
+          <p class="book-desc"></p>
+          <div class="book-metadata">
+            <span class="meta-item"><strong>Nhà xuất bản:</strong> <span class="publisher"></span></span>
+            <span class="meta-item"><strong>Năm:</strong> <span class="year"></span></span>
+          </div>
+        </div>
+      </article>
+    </template>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
