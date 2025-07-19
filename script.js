@@ -5,7 +5,7 @@
 function buildBadCharTable(pattern) {
     const table = new Map();
     const M = pattern.length;
-    for (let i = 0; i < 256; i++) { 
+    for (let i = 0; i < 256; i++) {
         table.set(String.fromCharCode(i), M);
     }
 
@@ -24,26 +24,23 @@ function boyerMooreSearch(text, pattern) {
     const N = text.length;
     const M = pattern.length;
 
-    if (M === 0) return true; 
-    if (N === 0 || M > N) return false; 
+    if (M === 0) return true;
+    if (N === 0 || M > N) return false;
 
     const badCharTable = buildBadCharTable(pattern);
 
     let s = 0;
-
     while (s <= (N - M)) {
         let j = M - 1;
-
         while (j >= 0 && pattern[j] === text[s + j]) {
             j--;
         }
 
         if (j < 0) {
-            return true; 
+            return true;
         } else {
             const charToShift = text[s + M - 1];
-            const shiftAmount = badCharTable.get(charToShift) || M; 
-
+            const shiftAmount = badCharTable.get(charToShift) || M;
             s += shiftAmount;
         }
     }
@@ -51,7 +48,6 @@ function boyerMooreSearch(text, pattern) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
     const bookListContainer = document.getElementById('bookList');
@@ -59,11 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoryMenu = document.getElementById('categoryMenu');
     const categoryToggle = document.getElementById('categoryToggle');
 
-
     let allBooks = [];
     let currentSearchTerm = '';
     let currentCategory = 'Tất cả';
-
 
     function renderBookCards(booksToRender) {
         bookListContainer.innerHTML = '';
@@ -76,7 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const bookCard = document.createElement('div');
                 bookCard.classList.add('book-card');
                 bookCard.innerHTML = `
-                    <img src="${book.coverURL || 'https://placehold.co/widthxheight/background_color/text_color?text=YourText'}" alt="${book.title || 'Untitled'} cover">
+                    <img src="${book.coverURL || 'https://placehold.co/200x300?text=No+Cover'}" alt="${book.title || 'Untitled'} cover">
+                    <p><strong>ID:</strong> ${book.id || 'Không có'}</p>
                     <h3>${book.title || 'Không có tiêu đề'}</h3>
                     <p>Tác giả: ${book.author || 'Đang cập nhật'}</p>
                     <p>NXB: ${book.publisher || 'Đang cập nhật'}</p>
@@ -84,24 +79,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>Thể loại: ${book.category || 'Đang cập nhật'}</p>
                     ${book.shortDesc ? `<p class="short-desc">${book.shortDesc}</p>` : ''}
                     ${book['google drive URL'] ? `<p><a href="${book['google drive URL']}" target="_blank">Tải xuống</a></p>` : ''}
-                `; 
+                `;
                 bookListContainer.appendChild(bookCard);
             });
         }
     }
-
     async function fetchBooks() {
-        searchButton.classList.add('loading'); 
+        searchButton.classList.add('loading');
         try {
             const response = await fetch('./books.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             allBooks = await response.json();
-            
+    
             populateCategories();
-            renderBookCards(allBooks); 
-
+            renderBookCards(allBooks);
         } catch (error) {
             console.error('Lỗi khi tải dữ liệu sách:', error);
             noResultsMessage.textContent = 'Không thể tải dữ liệu sách. Vui lòng thử lại sau.';
@@ -110,47 +103,46 @@ document.addEventListener('DOMContentLoaded', () => {
             searchButton.classList.remove('loading');
         }
     }
-
+    
     function filterAndRenderBooks() {
         searchButton.classList.add('loading');
-
         setTimeout(() => {
             const searchTerm = currentSearchTerm.toLowerCase().trim();
-
+    
             const filteredBooks = allBooks.filter(book => {
                 const titleText = (book.title || '').toLowerCase();
                 const authorText = (book.author || '').toLowerCase();
                 const publisherText = (book.publisher || '').toLowerCase();
                 const categoryText = (book.category || '').toLowerCase();
-
+    
                 const searchMatch = !searchTerm || (
-                                    boyerMooreSearch(titleText, searchTerm) ||
-                                    boyerMooreSearch(authorText, searchTerm) ||
-                                    boyerMooreSearch(publisherText, searchTerm)
-                                    );
-
+                    boyerMooreSearch(titleText, searchTerm) ||
+                    boyerMooreSearch(authorText, searchTerm) ||
+                    boyerMooreSearch(publisherText, searchTerm)
+                );
+    
                 const categoryMatch = (currentCategory === 'Tất cả' || categoryText === currentCategory.toLowerCase());
-
+    
                 return searchMatch && categoryMatch;
             });
-
+    
             renderBookCards(filteredBooks);
-            searchButton.classList.remove('loading'); 
+            searchButton.classList.remove('loading');
         }, 500);
     }
-
+    
     searchButton.addEventListener('click', () => {
         currentSearchTerm = searchInput.value;
         filterAndRenderBooks();
     });
-
+    
     searchInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
             searchButton.click();
         }
     });
-
+    
     function populateCategories() {
         const categories = new Set();
         allBooks.forEach(book => {
@@ -158,9 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 categories.add(book.category);
             }
         });
-
+    
         categoryMenu.innerHTML = '';
-
+    
         const allItem = document.createElement('li');
         const allLink = document.createElement('a');
         allLink.href = "#";
@@ -169,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         allLink.addEventListener('click', handleCategoryClick);
         allItem.appendChild(allLink);
         categoryMenu.appendChild(allItem);
-
+    
         const sortedCategories = Array.from(categories).sort();
         sortedCategories.forEach(category => {
             const listItem = document.createElement('li');
@@ -182,18 +174,18 @@ document.addEventListener('DOMContentLoaded', () => {
             categoryMenu.appendChild(listItem);
         });
     }
-
+    
     function handleCategoryClick(event) {
         event.preventDefault();
         categoryToggle.textContent = event.target.textContent + ' ▾';
         currentCategory = event.target.dataset.category;
         filterAndRenderBooks();
     }
-
-    document.addEventListener('click', function(e) {
+    
+    document.addEventListener('click', function (e) {
         const menu = document.getElementById('categoryMenu');
         const toggle = document.getElementById('categoryToggle');
-
+    
         if (toggle && toggle.contains(e.target)) {
             menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
         } else {
@@ -202,9 +194,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-    categoryToggle.addEventListener('click', function() {
+    
+    categoryToggle.addEventListener('click', function () {
         const menu = document.getElementById('categoryMenu');
         menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    });
+        });
+
     fetchBooks();
 });
