@@ -28,7 +28,7 @@ def excel_to_json(excel_file_path, json_file_path="Books.json", sheet_name=0, co
         'publisher': 'publisher',
         'year': 'year',
         'category': 'category',
-        'google_drive_URL': 'downloadURL' 
+        'downloadURL': 'downloadURL' 
     }
 
     if column_mapping is None:
@@ -85,12 +85,12 @@ if __name__ == "__main__":
         'publisher': 'publisher',
         'year': 'year',
         'category': 'category',
-        'google_drive_URL': 'downloadURL'
+        'downloadURL': 'downloadURL'
     }
 
     success = excel_to_json(excel_input_file, json_output_file, column_mapping=column_map)
 
     if success:
-        print("\n🎉 Quá trình chuyển đổi hoàn tất.")
+        print("\nQuá trình chuyển đổi hoàn tất.")
     else:
-        print("\n❌ Quá trình chuyển đổi gặp lỗi.")
+        print("\nQuá trình chuyển đổi gặp lỗi.")
