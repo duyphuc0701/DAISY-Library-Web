@@ -290,8 +290,6 @@ body {
   display: block;
 }
 
-
-
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -306,4 +304,59 @@ body {
     border-radius: 8px;
     border: 1px dashed #ccc;
     display: none;
+}
+/* DOWNLOAD BUTTON */
+.download-section {
+  text-align: right;
+  margin-top: -20px;
+  margin-right: 40px;
+}
+
+.downloadButton {
+  padding: 10px 20px;
+  background: #2c3e50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 13px;
+  margin-top: 6px;
+  text-align: right;
+}
+
+/* SPINNER */
+.spinner{
+  border: 8px solid #f3f3f3; 
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.hidden { 
+  display: none;
 }
