@@ -18,7 +18,7 @@
       <div class="search">
           <input type="text" id="searchInput" placeholder="Nhập nội dung tìm kiếm…">
           <button id="searchButton">
-              <span class="icon-search">🔍</span>
+              <span id="searchIcon" class="icon-search">🔍</span>
               <div id="loadingIndicator" class="loading-spinner" style="display: none;"></div>
           </button>
       </div>
@@ -29,29 +29,23 @@
         <li class="dropdown">
           <a href="#" id="categoryToggle">Thể loại sách ▾</a>
           <ul class="dropdown-menu" id="categoryMenu">
-            <li><a href="#">Tiểu thuyết</a></li>
-            <li><a href="#">Khoa học</a></li>
-            <li><a href="#">Lịch sử</a></li>
-            <li><a href="#">Thiếu nhi</a></li>
-            <li><a href="#">Nghệ thuật</a></li>
+            <!-- Categories will be rendered here by JS -->
           </ul>
         </li>
       </ul>
     </nav>
   </header>
 
-  <!-- MAIN CONTENT -->
-  <main>
-    <h1>Welcome to My Book Site</h1>
-    <p>…your content here…</p>
-    <div id="bookList" class="book-grid">
-    </div>
+    <!-- MAIN CONTENT -->
+    <main>
+      <h1>Thư viện sách nói DAISY</h1>
 
-    <div id="noResultsMessage" class="no-results" style="display: none;">
-      Không có kết quả tìm kiếm.
-    </div>
-  </main>
-  <script src="Books.json"></script>
-  <script src="script.js"></script>
-</body>
+      <div id="noResultsMessage" class="no-results" style="display: none;">
+      </div>
+    </main>
+    <script src="books.json"></script>
+
+    <script src="scripts/category.js" defer></script>
+    <script src="scripts/search.js" defer></script>
+  </body>
 </html>
