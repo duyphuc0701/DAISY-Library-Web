@@ -7,15 +7,15 @@
   padding: 18px 16px 14px 16px;
   margin: 18px 12px 0 0;
   width: 210px;
-  min-height: 320px;
+  min-height: 360px;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   justify-content: flex-start;
-  transition: box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 .BookCard:hover {
-  box-shadow: 0 4px 24px rgba(0,0,0,0.16);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.16);
   border-color: #bdbdbd;
 }
 .BookCard .book-image {
@@ -27,7 +27,18 @@
   background: #f5f5f5;
   display: block;
 }
-.BookCard h3, .BookCard p {
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #024c75;
+}
+
+.card-text {
+  font-size: 0.9rem;
+}
+/* Nội dung book card */
+.BookCard p,
+.BookCard h3 {
   text-align: left;
 }
 .BookCard h3 {
@@ -37,12 +48,22 @@
   font-weight: 600;
 }
 .BookCard p {
-  margin: 0 0 4px 0;
+  margin: 4px 0;
   color: #555;
   font-size: 0.97rem;
 }
-.BookCard .book-image + h3 {
-  margin-top: auto;
+.BookCard .short-desc {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #666;
+}
+/* Container sách */
+#bookList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 18px;
+  justify-content: flex-start;
 }
 
 /* Book list container */
@@ -285,12 +306,14 @@ body {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
   background: linear-gradient(135deg, #006fee, #00aaff);
 }
-
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
 .main-nav li:hover .dropdown-menu {
   display: block;
 }
-
-
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -306,4 +329,59 @@ body {
     border-radius: 8px;
     border: 1px dashed #ccc;
     display: none;
+}
+/* DOWNLOAD BUTTON */
+.download-section {
+  text-align: right;
+  margin-top: -20px;
+  margin-right: 40px;
+}
+
+.downloadButton {
+  padding: 10px 20px;
+  background: #2c3e50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 13px;
+  margin-top: 6px;
+  text-align: right;
+}
+
+/* SPINNER */
+.spinner{
+  border: 8px solid #f3f3f3; 
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.hidden { 
+  display: none;
 }

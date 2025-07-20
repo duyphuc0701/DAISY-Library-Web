@@ -11,6 +11,42 @@ function renderBookDetail(book) {
     document.getElementById("book-category").innerText = book.category;
     document.getElementById("book-description").innerText = book.description;
     document.getElementById("book-cover").src = book.image;
+
+    const downloadButton = document.getElementById('downloadButton');
+    const spinner = document.getElementById('spinner');
+    const errorMessage = document.getElementById('errorMessage');
+
+    if (book.downloadUrl) {
+        downloadButton.classList.remove('hidden');
+        downloadButton.setAttribute('data-url', book.downloadUrl);
+
+        downloadButton.addEventListener('click', async (e) => {
+            e.preventDefault();
+            errorMessage.classList.add('hidden');
+            spinner.classList.remove('hidden');
+
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            try {
+                const url = downloadButton.getAttribute('data-url');
+                const head = await fetch(url, { method: 'HEAD' });
+                if (!head.ok) throw new Error('File not found');
+
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = '';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } catch (error) {
+                errorMessage.textContent = "Không tải được file. Vui lòng thử lại sau!";
+                errorMessage.classList.remove('hidden');
+                setTimeout(() => errorMessage.classList.add('hidden'), 2000);
+                } finally {
+                spinner.classList.add('hidden');
+            }
+        });
+    }
 }
 
 async function loadBookAndRender() {
