@@ -62,6 +62,7 @@ body {
 .main-nav {
   background: #e8f6f4;
   padding: 8px 20px;
+  min-height: 56px;
 }
 .main-nav ul {
   list-style: none;
