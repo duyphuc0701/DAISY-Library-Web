@@ -327,7 +327,7 @@ body {
   display: flex;
   gap: 40px;
   margin: 40px auto;
-  background: #fff;
+  background: #f7eeee;
   padding: 30px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
@@ -342,7 +342,7 @@ body {
 }
 
 .book-info h1 {
-  color: #024c75;
+  color: #008cff;
   margin-bottom: 20px;
 }
 

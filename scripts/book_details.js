@@ -20,21 +20,15 @@ function renderBookDetail(book) {
     qrContainer.innerHTML = ""; // Xóa nội dung hiện có trong container QR code
 
     try {
-      // Cách đúng để sử dụng thư viện QRCode từ qrcode.min.js
       // Khởi tạo một đối tượng QRCode mới
       const qrcode = new QRCode(qrContainer, {
         text: book.downloadUrl, // Dữ liệu sẽ được mã hóa vào QR code
         width: 128, // Chiều rộng của QR code (có thể điều chỉnh)
         height: 128, // Chiều cao của QR code (có thể điều chỉnh)
-        colorDark: "#000000", // Màu của các phần tử tối trong QR code
-        colorLight: "#ffffff", // Màu của nền sáng trong QR code
+        colorDark: "#2f1d1dff", // Màu của các phần tử tối trong QR code
+        colorLight: "#f3eeeeff", // Màu của nền sáng trong QR code
         correctLevel: QRCode.CorrectLevel.H, // Mức độ sửa lỗi (L, M, Q, H - H là cao nhất)
       });
-
-      // Mã QR sẽ được vẽ vào phần tử qrContainer bởi hàm khởi tạo.
-      // Nếu bạn cần kích hoạt vẽ hoặc tạo ảnh rõ ràng sau này,
-      // bạn thường gọi các phương thức trên thể hiện 'qrcode', như qrcode.makeImage().
-      // Tuy nhiên, đối với hiển thị cơ bản, hàm khởi tạo thường xử lý nó nếu được cung cấp `text`.
 
       console.log("Mã QR đã được tạo thành công.");
     } catch (e) {
