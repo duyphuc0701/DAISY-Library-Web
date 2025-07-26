@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>My Book Site</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style_footer.css">
 </head>
 <body>
 
@@ -47,5 +48,14 @@
 
     <script src="scripts/category.js" defer></script>
     <script src="scripts/search.js" defer></script>
-  </body>
+  <div id="footer-placeholder"></div>
+  <script>
+    // Tải nội dung footer.html vào trang
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      });
+  </script>
+</body>
 </html>
