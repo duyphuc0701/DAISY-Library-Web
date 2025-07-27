@@ -15,7 +15,7 @@ def convert_google_sheet_url_to_export_excel(url):
     export_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=xlsx&id={sheet_id}"
     return export_url
 
-def excel_url_to_json(google_sheet_edit_url, json_file_path="Books.json", sheet_name=0, column_mapping=None):
+def excel_url_to_json(google_sheet_edit_url, json_file_path="books.json", sheet_name=0, column_mapping=None):
     try:
         # Tự động chuyển URL Google Sheet gốc sang URL export Excel
         export_url = convert_google_sheet_url_to_export_excel(google_sheet_edit_url)
@@ -41,8 +41,8 @@ def excel_url_to_json(google_sheet_edit_url, json_file_path="Books.json", sheet_
         'id': 'id',
         'title': 'title',
         'author': 'author',
-        'coverURL': 'coverURL',
-        'shortDesc': 'shortDesc',
+        'image': 'image',
+        'description': 'description',
         'publisher': 'publisher',
         'year': 'year',
         'category': 'category',
@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
     success = excel_url_to_json(
         google_sheet_edit_url=google_sheet_url,
-        json_file_path="Books.json",
+        json_file_path="books.json",
         sheet_name=sheet_name
     )
 
