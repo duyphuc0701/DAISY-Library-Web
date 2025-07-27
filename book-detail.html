@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="vi">
   <head>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="UTF-8" />
     <title>Chi tiết sách</title>
     <link rel="stylesheet" href="styles.css" />
@@ -14,29 +16,35 @@
           <!-- replace with your logo -->
           <img src="Logo.png" alt="Site Logo">
           </div>
-          <div class="search">
-              <input type="text" id="searchInput" placeholder="Nhập nội dung tìm kiếm…">
-              <button id="searchButton">
-              <span id="searchIcon" class="icon-search">🔍</span>
+          <div class="input-group w-100" style="max-width: 500px;">
+            <input
+              type="text"
+              class="form-control"
+              id="searchInput"
+              placeholder="Nhập nội dung tìm kiếm…"
+              aria-label="Tìm kiếm"
+            />
+            <button class="btn btn-outline-secondary position-relative" type="button" id="searchButton">
+              <span id="searchIcon">🔍</span>
               <div
-                  id="loadingIndicator"
-                  class="loading-spinner"
-                  style="display: none"
+                id="loadingIndicator"
+                class="spinner-border spinner-border-sm text-primary position-absolute top-50 start-50 translate-middle d-none"
+                role="status"
               ></div>
-              </button>
+            </button>
           </div>
       </div>
 
       <nav class="main-nav">
           <ul>
-          <li><a href="/index.html">Trang chủ</a></li>
+          <li><a href=".">Trang chủ</a></li>
           <li class="dropdown">
-              <a href="#" id="categoryToggle">Thể loại sách ▾</a>
+              <a href="#" id="categoryToggle">Thể loại sách</a>
               <ul class="dropdown-menu" id="categoryMenu">
               <!-- Categories will be rendered here by JS -->
               </ul>
           </li>
-          <li><a href="/about-daisy.html">Giới thiệu</a></li>
+          <li><a href="./about-daisy.html">Giới thiệu</a></li>
           </ul>
       </nav>
     </header>
@@ -49,7 +57,7 @@
         <p><b>Năm xuất bản:</b> <span id="book-year"></span></p>
         <p><b>Thể loại:</b> <span id="book-category"></span></p>
         <p id="book-description"></p>
-        <a href="index.html" class="back-btn">⬅ Quay lại trang chủ</a>
+        <a href="." class="back-btn">⬅ Quay lại trang chủ</a>
       </div>
 
       <!-- Ảnh sách bên phải -->
