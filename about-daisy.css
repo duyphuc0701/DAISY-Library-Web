@@ -1,0 +1,165 @@
+.clear{
+    clear: both;
+}
+
+.col{
+    float: left;
+    padding: 0 8px;
+}
+
+.col-half{
+    display: inline-block;
+    width: 50%;
+}
+
+.text-center{
+    text-align: center;
+}
+/* Heading about styles */
+
+.content-about-daisy .introduce-opening{
+    padding: 48px 24px;
+}
+
+.content-about-daisy .title-about-daisy{
+    font-size: 30px;
+    color: #000;
+    text-align: center;
+    display: block;
+    position: relative;
+    justify-content: center;
+    line-height: 120%;
+    margin-bottom: 24px;
+}
+
+.content-about-daisy img{
+    width: 100%;
+}
+
+.content-about-daisy .introduce-text{
+    padding: 0px 48px 50px;
+    /* background-color: #e8f6f4; */
+    line-height: 1.6;
+}
+
+.content-about-daisy .introduce-text h2{
+    display: block;
+    max-width: 100%;
+    padding: 10px;
+    font-size: 28px;
+}
+
+.content-about-daisy .introduce-text .text-content{
+    max-width: 800px;
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.video-daisy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* Căn ngang vào giữa */
+    justify-content: center; /* Căn dọc vào giữa (nếu muốn) */
+    height: 500px;    /* Chiều cao tối thiểu: 100% viewport */
+    margin: 0;
+    background-color: #e8f6f4;
+}
+
+.video-daisy h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.video-daisy iframe{
+    border: none;
+    max-width: 90%;   /* Đảm bảo không tràn màn hình nhỏ */
+    height: 315px;
+    border-radius: 12px;  /* Bo góc (tuỳ chỉnh số pixel) */
+}
+
+.stage-daisy-web{
+    margin-top: 46px;
+    padding: 16px 24px;
+}
+
+.stage-daisy-web h2{
+    font-size: 28px;
+    margin-bottom: 24px;
+}
+
+.stage-item {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.stage-item::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #dcdcdc;
+}
+
+.stage-dot {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    color: #4CAF50;
+    border: 3px solid #4CAF50;
+    border-radius: 50%;
+    background: white;
+}
+
+.stage-content {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.stage-content h3 {
+    font-weight: 600;
+    font-size: 24px;
+    width: 100%;
+    margin: 0 0 12px 0;
+    color: #4CAF50;
+}
+
+.text-stage{
+    width: 60%;
+    font-size: 16px;
+    padding: 0px 16px 16px;
+    text-align: justify;
+}
+
+.img-stage{
+    width: 40%;
+    padding: 0px 16px 16px;
+}
+
+@media only screen and (max-width: 920px) {
+  /* Styles */
+  .text-stage{
+    width: 100%;
+    display: block;
+  }
+
+  .img-stage{
+    width: 100%;
+    display: block;
+  }
+}
+
+.stage-daisy-web p{
+    margin-left: 24px;
+}

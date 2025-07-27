@@ -57,22 +57,10 @@
   font-size: 0.9rem;
   color: #666;
 }
-/* Container sách */
-#bookList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 18px;
-  justify-content: flex-start;
-}
 
 /* Book list container */
 #bookList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
   margin-top: 18px;
-  justify-content: flex-start;
 }
 
 /* Dropdown menu improvements */
@@ -334,21 +322,6 @@ body {
   border-radius: 12px;
   align-items: center;
   max-width: 1200px;
-}
-
-.book-info {
-  flex: 1;
-  font-size: 18px;
-  line-height: 1.6;
-}
-
-.book-info h1 {
-  color: #024c75;
-  margin-bottom: 20px;
-}
-
-.book-info p {
-  margin-bottom: 10px;
 }
 
 .book-image img {

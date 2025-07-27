@@ -77,20 +77,31 @@ document.addEventListener('DOMContentLoaded', () => {
             noResultsMessage.textContent = 'Không có kết quả tìm kiếm.';
         } else {
             noResultsMessage.style.display = 'none';
+            const row = document.createElement('div');
+            row.className = 'row g-4';
+
             booksToRender.forEach(book => {
-                const card = document.createElement('div');
-                card.className = 'BookCard'; // Match category.js
-                card.dataset.category = book.category;
-                card.innerHTML = `
-                    <img src="${book.image || 'https://placehold.co/200x300?text=No+Cover'}" alt="${book.title || 'Untitled'}"
-                         class="book-image" style="width:100px;height:auto;display:block;margin-bottom:8px;object-fit:cover;">
-                    <h3>${book.title || 'Không có tiêu đề'}</h3>
-                    <p>Tác giả: ${book.author || 'Đang cập nhật'}</p>
-                    <p>Chủ đề: ${book.category || 'Đang cập nhật'}</p>
-                `;
-                card.onclick = () => goToDetail(book.id);
-                bookListContainer.appendChild(card);
+            const col = document.createElement('div');
+            col.className = 'col-12 col-sm-6 col-md-4 col-lg-3'; // Bootstrap grid
+
+            col.innerHTML = `
+                <div class="card h-100 shadow-sm border-0">
+                <img src="${book.image}" class="card-img-top" alt="${book.title}" style="object-fit: cover; height: 220px;">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">${book.title}</h5>
+                    <p class="card-text text-muted mb-1"><strong>Tác giả:</strong> ${book.author}</p>
+                    <p class="card-text text-muted mb-1"><strong>NXB:</strong> ${book.publisher}</p>
+                    <p class="card-text text-muted"><strong>Chủ đề:</strong> ${book.category}</p>
+                    <a href="book-detail.html?id=${book.id}" class="mt-auto btn btn-primary btn-sm">Xem chi tiết</a>
+                </div>
+                </div>
+            `;
+
+            row.appendChild(col);
             });
+
+            bookListContainer.innerHTML = '';
+            bookListContainer.appendChild(row);
         }
     }
 

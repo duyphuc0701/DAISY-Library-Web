@@ -1,16 +1,3 @@
-// const books = [
-//     // { title: "", author: "", category: "", image: "" },
-//     {id: 1, title: "Sự tích dưa hấu",           author: "Nguyễn Đổng Chi",   category: "Cổ tích - thần thoại",  image: "image/co_tich_than_thoai/sutichduahau.jpg", year: 2023, publisher: "NXB Kim Đồng", description: "Một câu chuyện cổ tích thú vị về nguồn gốc của dưa hấu." },
-//     {id: 2, title: "Sự tích trầu, cau và vôi",  author: "Nguyễn Đổng Chi",   category: "Cổ tích - thần thoại",  image: "image/co_tich_than_thoai/sutichtraucauvoi.jpg", year: 2023, publisher: "NXB Kim Đồng", description: "Câu chuyện giải thích nguồn gốc của trầu, cau và vôi trong văn hoá Việt Nam." },
-//     {id: 3, title: "Búp sen xanh",              author: "Sơn Tùng",          category: "Văn hoá - Lịch sử",     image: "image/van_hoa_lich_su/bupsenxanh.jpg", year: 2023, publisher: "NXB Văn Học", description: "Một tác phẩm nổi tiếng về văn hoá và lịch sử Việt Nam." },
-//     {id: 4, title: "Cơ sở văn hoá Việt Nam",    author: "Trần Ngọc Thêm",    category: "Văn hoá - Lịch sử",     image: "image/van_hoa_lich_su/cosovanhoaVN.png", year: 2023, publisher: "NXB Chính Trị Quốc Gia", description: "Cuốn sách cung cấp cái nhìn sâu sắc về văn hoá Việt Nam." },
-//     {id: 5, title: "Không gia đình",            author: "Hector Malot",      category: "Văn học nước ngoài",    image: "image/van_hoc_nuoc_ngoai/khonggiadinh.png", year: 2023, publisher: "NXB Kim Đồng", description: "Một tác phẩm kinh điển của văn học Pháp về tình cảm gia đình." },
-//     {id: 6, title: "Phù thuỷ xứ OZ",            author: "Frank Baum",        category: "Văn học nước ngoài",    image: "image/van_hoc_nuoc_ngoai/phuthuyxuoz.png", year: 2023, publisher: "NXB Kim Đồng", description: "Cuốn sách kể về cuộc phiêu lưu của cô bé Dorothy ở xứ Oz." },
-//     {id: 7, title: "Số đỏ",                     author: "Vũ Trọng Phụng",    category: "Văn học Việt Nam",      image: "image/van_hoc_Viet_Nam/sodo.png", year: 2023, publisher: "NXB Văn Học", description: "Một tác phẩm nổi tiếng của văn học hiện đại Việt Nam, phê phán xã hội thượng lưu." },
-//     {id: 8, title: "Tắt đèn",                   author: "Ngô Tất Tố",        category: "Văn học Việt Nam",      image: "image/van_hoc_Viet_Nam/tatden.png", year: 2023, publisher: "NXB Văn Học", description: "Cuốn tiểu thuyết nổi tiếng về cuộc sống của người nông dân Việt Nam trong thời kỳ phong kiến." },
-
-// ];
-
 let currentCategory = "Tất cả";
 let books = [];
 
@@ -56,7 +43,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         renderBooks(filtered);
 
         // Cập nhật nhãn dropdown và ẩn menu
-        categoryToggle.textContent = selected + ' ▾';
         categoryMenu.style.display = 'none';
       });
     });
@@ -78,8 +64,6 @@ document.addEventListener('DOMContentLoaded', async function() {
   const bookListContainer = document.getElementById('bookList');
 
   function renderBooks(filteredBooks) {
-    bookListContainer.innerHTML = '';
-
     if (filteredBooks.length === 0) {
       bookListContainer.innerHTML = `<p class="text-muted">Không có sách nào cho chủ đề này.</p>`;
       return;
@@ -107,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
       row.appendChild(col);
     });
-
+    bookListContainer.innerHTML = '';
     bookListContainer.appendChild(row);
   }
 
