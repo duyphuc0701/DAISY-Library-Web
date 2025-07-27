@@ -19,30 +19,33 @@
       <div class="search">
           <input type="text" id="searchInput" placeholder="Nhập nội dung tìm kiếm…">
           <button id="searchButton">
-              <span id="searchIcon" class="icon-search">🔍</span>
-              <div id="loadingIndicator" class="loading-spinner" style="display: none;"></div>
+            <span id="searchIcon" class="icon-search">🔍</span>
+            <div
+              id="loadingIndicator"
+              class="loading-spinner"
+              style="display: none"
+            ></div>
           </button>
+        </div>
       </div>
-    </div>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="#">Trang chủ</a></li>
-        <li class="dropdown">
-          <a href="#" id="categoryToggle">Thể loại sách ▾</a>
-          <ul class="dropdown-menu" id="categoryMenu">
-            <!-- Categories will be rendered here by JS -->
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </header>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="#">Trang chủ</a></li>
+          <li class="dropdown">
+            <a href="#" id="categoryToggle">Thể loại sách ▾</a>
+            <ul class="dropdown-menu" id="categoryMenu">
+              <!-- Categories will be rendered here by JS -->
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
     <!-- MAIN CONTENT -->
     <main>
       <h1>Thư viện sách nói DAISY</h1>
 
-      <div id="noResultsMessage" class="no-results" style="display: none;">
-      </div>
+      <div id="noResultsMessage" class="no-results" style="display: none"></div>
     </main>
     <script src="books.json"></script>
 

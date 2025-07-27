@@ -23,15 +23,23 @@
       <div class="book-image">
         <img id="book-cover" src="" alt="Ảnh bìa sách" />
       </div>
-
-      <div class="download-section">
-        <button class="downloadButton hidden" id="downloadButton">
-          Tải xuống
-          <div class="spinner hidden" id="spinner"></div>
-        </button>
-        <div class="errorMessage hidden" id="errorMessage">File không tìm thấy!</div>
+      <div>
+        <div class="qr-section">
+          <h3>Quét mã QR để tải sách</h3>
+          <div id="qrcode"></div>
+        </div>
+        <div class="download-section">
+          <button class="downloadButton hidden" id="downloadButton">
+            Tải xuống
+            <div class="spinner hidden" id="spinner"></div>
+          </button>
+          <div class="errorMessage hidden" id="errorMessage">
+            File không tìm thấy!
+          </div>
+        </div>
       </div>
     </div>
+    <script src="scripts/qrcode.min.js" defer></script>
     <script src="scripts/book_details.js" defer></script>
     <div id="footer-placeholder"></div>
     <script>
