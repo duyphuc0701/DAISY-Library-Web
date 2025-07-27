@@ -76,6 +76,21 @@ def excel_url_to_json(google_sheet_edit_url, json_file_path="books.json", sheet_
         df_final['year'] = df_final['year'].apply(process_year)
         print("Đã xử lý cột 'year': chuyển thành chuỗi hoặc None.")
 
+    # ✅ Xử lý chuyển link Google Drive thành link download trực tiếp
+    def convert_drive_link(link):
+        if pd.isna(link):
+            return None
+        match = re.search(r'd/([a-zA-Z0-9_-]+)', link)
+        if match:
+            file_id = match.group(1)
+            print(f"Chuyển đổi link Google Drive thành link download: {link} -> https://drive.google.com/uc?export=download&id={file_id}")
+            return f"https://drive.google.com/uc?export=download&id={file_id}"
+        else:
+            print(f"Không khớp định dạng link Google Drive: {link}")
+        return link  # Trả lại link cũ nếu không khớp
+
+    df_final['downloadURL'] = df_final['downloadURL'].apply(convert_drive_link)
+
     # Ghi file JSON
     try:
         with open(json_file_path, "w", encoding="utf-8") as f:
