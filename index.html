@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>My Book Site</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style_footer.css">
 </head>
 <body>
 
@@ -18,8 +22,12 @@
       <div class="search">
           <input type="text" id="searchInput" placeholder="Nhập nội dung tìm kiếm…">
           <button id="searchButton">
-              <span id="searchIcon" class="icon-search">🔍</span>
-              <div id="loadingIndicator" class="loading-spinner" style="display: none;"></div>
+            <span id="searchIcon" class="icon-search">🔍</span>
+            <div
+              id="loadingIndicator"
+              class="loading-spinner"
+              style="display: none"
+            ></div>
           </button>
       </div>
     </div>
@@ -40,13 +48,23 @@
     <!-- MAIN CONTENT -->
     <main>
       <h1>Thư viện sách nói DAISY</h1>
-
-      <div id="noResultsMessage" class="no-results" style="display: none;">
-      </div>
+      <div id="bookList"></div>
+      <div id="noResultsMessage" class="no-results" style="display: none"></div>
     </main>
     <script src="books.json"></script>
 
     <script src="scripts/category.js" defer></script>
     <script src="scripts/search.js" defer></script>
-  </body>
+      <!-- Bootstrap JS (optional, for dropdowns/modals) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <div id="footer-placeholder"></div>
+  <script>
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      });
+  </script>
+</body>
 </html>
