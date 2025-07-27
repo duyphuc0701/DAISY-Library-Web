@@ -127,19 +127,31 @@ document.addEventListener('DOMContentLoaded', () => {
         showLoading();
         setTimeout(() => {
             const searchTerm = currentSearchTerm.toLowerCase().trim();
+
             const filteredBooks = allBooks.filter(book => {
                 const titleText = (book.title || '').toLowerCase();
                 const authorText = (book.author || '').toLowerCase();
                 const publisherText = (book.publisher || '').toLowerCase();
                 const categoryText = (book.category || '').toLowerCase();
+
                 const searchMatch = !searchTerm || (
                     boyerMooreSearch(titleText, searchTerm) ||
                     boyerMooreSearch(authorText, searchTerm) ||
                     boyerMooreSearch(publisherText, searchTerm)
                 );
+
                 const categoryMatch = (currentCategory === 'Tất cả' || categoryText === currentCategory.toLowerCase());
                 return searchMatch && categoryMatch;
             });
+
+            // Update the heading with number of results
+            const headingElement = document.getElementById('pageHeading');
+            if (searchTerm) {
+                headingElement.textContent = `Đã tìm thấy ${filteredBooks.length} kết quả cho "${currentSearchTerm}"`;
+            } else {
+                headingElement.textContent = currentCategory || 'Tất cả';
+            }
+
             renderBookCards(filteredBooks);
             hideLoading();
         }, 500);
