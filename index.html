@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>My Book Site</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <!-- HEADER -->
-    <header class="site-header">
-      <div class="top-bar">
-        <div class="logo">
-          <!-- replace with your logo -->
-          <img src="logo.png" alt="Site Logo" />
-        </div>
-        <div class="search">
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Nhập nội dung tìm kiếm…"
-          />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>My Book Site</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style_footer.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="top-bar">
+      <div class="logo">
+        <!-- replace with your logo -->
+        <img src="logo.png" alt="Site Logo">
+      </div>
+      <div class="search">
+          <input type="text" id="searchInput" placeholder="Nhập nội dung tìm kiếm…">
           <button id="searchButton">
             <span id="searchIcon" class="icon-search">🔍</span>
             <div
@@ -53,5 +51,13 @@
 
     <script src="scripts/category.js" defer></script>
     <script src="scripts/search.js" defer></script>
-  </body>
+  <div id="footer-placeholder"></div>
+  <script>
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      });
+  </script>
+</body>
 </html>

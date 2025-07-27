@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>Chi tiết sách</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style_footer.css" />
   </head>
   <body>
     <div class="book-detail">
@@ -40,5 +41,14 @@
     </div>
     <script src="scripts/qrcode.min.js" defer></script>
     <script src="scripts/book_details.js" defer></script>
+    <div id="footer-placeholder"></div>
+    <script>
+      // Tải nội dung footer.html vào trang
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-placeholder').innerHTML = data;
+        });
+    </script>
   </body>
 </html>
