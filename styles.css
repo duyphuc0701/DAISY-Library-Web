@@ -123,12 +123,12 @@ body {
   align-items: center;
   justify-content: space-between;
   background: #fff;
-  padding: 10px 20px;
+  padding: 10px 10px;
   border-bottom: 1px solid #eee;
 }
 
 .site-header .logo img {
-  height: 40px;
+  height: 90px;
 }
 
 /* Optional: size for spinner */
