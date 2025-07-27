@@ -1,0 +1,96 @@
+
+/* ==== Unified Footer Styles ==== */
+.site-footer {
+  background: linear-gradient(90deg, #0d47a1 0%, #1976d2 50%, #42a5f5 100%);
+  color: #fff;
+  padding: 32px 0 0 0;
+  font-size: 16px;
+  margin-top: 80vh;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+  width: 100%;
+  flex-shrink: 0;
+}
+.footer-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.footer-logo-contact {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  padding: 0 0 8px 0;
+}
+.footer-logo-col {
+  flex: 0 0 320px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 220px;
+  max-width: 340px;
+  margin: 0;
+  padding: 0;
+}
+.footer-logo {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  max-height: 180px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #fff;
+  padding: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  display: block;
+  margin: 0 auto;
+}
+.footer-contact-info {
+  flex: 1 1 400px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 600px;
+  margin-left: 0;
+  padding: 0 0 0 16px;
+}
+.footer-contact-info p {
+  margin: 4px 0;
+  color: #fff;
+  font-size: 16px;
+}
+.footer-contact-info span {
+  font-weight: 700;
+}
+.footer-contact-info a {
+  color: #ffeb3b;
+  text-decoration: underline;
+}
+.footer-contact-info a:hover {
+  color: #ffc107;
+}
+.footer-note {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #c5cae9;
+  text-align: center;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+@media (max-width: 1100px) {
+  .footer-container {
+    max-width: 98vw;
+  }
+  .footer-3col {
+    gap: 18px;
+  }
+  .footer-logo-col, .footer-contact-info, .footer-bank-info {
+    max-width: 100%;
+  }
+}
