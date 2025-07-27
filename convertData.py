@@ -46,7 +46,7 @@ def excel_url_to_json(google_sheet_edit_url, json_file_path="books.json", sheet_
         'publisher': 'publisher',
         'year': 'year',
         'category': 'category',
-        'downloadURL': 'downloadURL'
+        'downloadUrl': 'downloadUrl'
     }
 
     if column_mapping is None:
@@ -89,7 +89,7 @@ def excel_url_to_json(google_sheet_edit_url, json_file_path="books.json", sheet_
             print(f"Không khớp định dạng link Google Drive: {link}")
         return link  # Trả lại link cũ nếu không khớp
 
-    df_final['downloadURL'] = df_final['downloadURL'].apply(convert_drive_link)
+    df_final['downloadUrl'] = df_final['downloadUrl'].apply(convert_drive_link)
 
     # Ghi file JSON
     try:
