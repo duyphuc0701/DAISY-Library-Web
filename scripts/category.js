@@ -75,10 +75,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
   });
   // 4. Render books
-  const main = document.querySelector('main');
-  let bookListContainer = document.createElement('div');
-  bookListContainer.id = 'bookList';
-  main.appendChild(bookListContainer);
+  const bookListContainer = document.getElementById('bookList');
 
   function renderBooks(filteredBooks) {
     bookListContainer.innerHTML = '';
