@@ -18,16 +18,22 @@
         <!-- replace with your logo -->
         <img src="Logo.png" alt="Site Logo">
         </div>
-        <div class="search">
-            <input type="text" id="searchInput" placeholder="Nhập nội dung tìm kiếm…">
-            <button id="searchButton">
-            <span id="searchIcon" class="icon-search">🔍</span>
+        <div class="input-group w-100" style="max-width: 500px;">
+          <input
+            type="text"
+            class="form-control"
+            id="searchInput"
+            placeholder="Nhập nội dung tìm kiếm…"
+            aria-label="Tìm kiếm"
+          />
+          <button class="btn btn-outline-secondary position-relative" type="button" id="searchButton">
+            <span id="searchIcon">🔍</span>
             <div
-                id="loadingIndicator"
-                class="loading-spinner"
-                style="display: none"
+              id="loadingIndicator"
+              class="spinner-border spinner-border-sm text-primary position-absolute top-50 start-50 translate-middle d-none"
+              role="status"
             ></div>
-            </button>
+          </button>
         </div>
     </div>
 
@@ -47,7 +53,7 @@
 
   <!-- MAIN CONTENT -->
   <main>
-    <h1>Thư viện sách nói DAISY</h1>
+    <h1 id="pageHeading">Thư viện sách nói DAISY</h1>
     <div class="container">
       <div id="bookList"></div>
     </div>

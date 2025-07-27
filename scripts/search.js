@@ -49,13 +49,13 @@ function boyerMooreSearch(text, pattern) {
 }
 
 function showLoading() {
-  document.getElementById('searchIcon').style.display = 'none';
-  document.getElementById('loadingIndicator').style.display = 'inline-block';
+    document.getElementById('searchButton').classList.add('loading');
+    document.getElementById('loadingIndicator').classList.remove('d-none');
 }
 
 function hideLoading() {
-  document.getElementById('searchIcon').style.display = 'inline-block';
-  document.getElementById('loadingIndicator').style.display = 'none';
+    document.getElementById('searchButton').classList.remove('loading');
+    document.getElementById('loadingIndicator').classList.add('d-none');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleCategoryClick(event) {
         event.preventDefault();
-        categoryToggle.textContent = event.target.textContent + ' ▾';
+        document.getElementById('pageHeading').textContent = event.target.textContent;
         currentCategory = event.target.dataset.category;
         filterAndRenderBooks();
     }

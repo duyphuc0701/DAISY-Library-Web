@@ -95,24 +95,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     bookListContainer.appendChild(row);
   }
 
-  /*
-  function setupCategoryFilter() {
-    if (categoryMenu) {
-      categoryMenu.addEventListener('click', function (e) {
-        if (e.target.tagName === 'A') {
-          e.preventDefault();
-          const selected = e.target.getAttribute('data-category');
-          currentCategory = selected; // Cập nhật giá trị đã chọn
-          const filtered = selected === 'Tất cả'
-            ? window.books
-            : window.books.filter(book => book.category === selected);
-          renderBooks(filtered);
-        }
-      });
-    }
-  }
-  */
-
   function waitForBooksAndRender() {
     if (window.books && Array.isArray(window.books)) {
       renderBooks(window.books);
