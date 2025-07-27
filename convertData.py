@@ -1,82 +1,43 @@
 import pandas as pd
 import json
-import os
+import requests
+from io import BytesIO
+import re
 
-def excel_to_json(excel_file_path, json_file_path="Books.json", sheet_name=0, column_mapping=None):
-    if not os.path.exists(excel_file_path):
-        print(f"Lỗi: File Excel không tồn tại tại đường dẫn '{excel_file_path}'.")
-        return False
+def convert_google_sheet_url_to_export_excel(url):
+    """
+    Nhận URL gốc của Google Sheet và chuyển sang URL export dạng Excel (.xlsx)
+    """
+    match = re.search(r'/d/([a-zA-Z0-9-_]+)', url)
+    if not match:
+        raise ValueError("Không thể trích xuất ID từ URL Google Sheet.")
+    sheet_id = match.group(1)
+    export_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=xlsx&id={sheet_id}"
+    return export_url
 
+def excel_url_to_json(google_sheet_edit_url, json_file_path="Books.json", sheet_name=0, column_mapping=None):
     try:
-        df = pd.read_excel(excel_file_path, sheet_name=sheet_name)
-    except FileNotFoundError:
-        print(f"Lỗi: Không tìm thấy file Excel tại đường dẫn '{excel_file_path}'.")
+        # Tự động chuyển URL Google Sheet gốc sang URL export Excel
+        export_url = convert_google_sheet_url_to_export_excel(google_sheet_edit_url)
+
+        # Tải nội dung file Excel từ URL
+        response = requests.get(export_url)
+        response.raise_for_status()
+
+        # Đọc sheet từ nội dung Excel (có thể là chỉ số hoặc tên sheet)
+        df = pd.read_excel(BytesIO(response.content), sheet_name=sheet_name)
+    except requests.exceptions.RequestException as e:
+        print(f"Lỗi khi tải file từ URL: {e}")
         return False
     except ValueError as e:
-        print(f"Lỗi khi đọc sheet '{sheet_name}' từ file Excel: {e}. Vui lòng kiểm tra tên sheet.")
+        print(f"Lỗi khi đọc sheet '{sheet_name}': {e}")
         return False
     except Exception as e:
-        print(f"Lỗi không xác định khi đọc file Excel: {e}")
+        print(f"Lỗi không xác định khi xử lý Google Sheet: {e}")
         return False
 
+    # Mapping mặc định nếu không cung cấp
     default_column_mapping = {
-        'id': 'id',
-        'title': 'title',
-        'author': 'author',
-        'coverURL': 'coverURL',
-        'shortDesc': 'shortDesc',
-        'publisher': 'publisher',
-        'year': 'year',
-        'category': 'category',
-        'downloadURL': 'downloadURL' 
-    }
-
-    if column_mapping is None:
-        column_mapping = default_column_mapping
-
-    missing_columns = [col_excel for col_excel in column_mapping if col_excel not in df.columns]
-    if missing_columns:
-        print(f"Lỗi: Các cột sau không tìm thấy trong file Excel: {', '.join(missing_columns)}.")
-        return False
-
-    # Đổi tên các cột theo mapping
-    df_mapped = df.rename(columns=column_mapping)
-    json_fields = list(column_mapping.values())
-    df_final = df_mapped[json_fields].copy()
-
-    # Xử lý cột 'year'
-    if 'year' in df_final.columns:
-        def process_year(year_value):
-            if pd.isna(year_value):
-                return None
-            year_str = str(year_value)
-            if year_str.isdigit():
-                return str(int(year_value))  
-            else:
-                return year_str
-
-        df_final['year'] = df_final['year'].apply(process_year)
-        print("Đã xử lý cột 'year': chuyển thành chuỗi hoặc None.")
-
-    books_data = df_final.to_dict(orient="records")
-
-    try:
-        with open(json_file_path, "w", encoding="utf-8") as f:
-            json.dump(books_data, f, ensure_ascii=False, indent=4)
-        print(f"✅ Dữ liệu từ '{excel_file_path}' đã được chuyển sang JSON '{json_file_path}'.")
-        return True
-    except IOError as e:
-        print(f"Lỗi ghi file JSON '{json_file_path}': {e}")
-        return False
-    except Exception as e:
-        print(f"Lỗi không xác định khi ghi file JSON: {e}")
-        return False
-
-if __name__ == "__main__":
-    excel_input_file = "DaisyBooks.xlsx"
-    json_output_file = "Books.json"
-
-    column_map = {
         'id': 'id',
         'title': 'title',
         'author': 'author',
@@ -88,7 +49,55 @@ if __name__ == "__main__":
         'downloadURL': 'downloadURL'
     }
 
-    success = excel_to_json(excel_input_file, json_output_file, column_mapping=column_map)
+    if column_mapping is None:
+        column_mapping = default_column_mapping
+
+    # Kiểm tra các cột có đầy đủ không
+    missing_columns = [col_excel for col_excel in column_mapping if col_excel not in df.columns]
+    if missing_columns:
+        print(f"Lỗi: Các cột sau không tìm thấy trong Google Sheet: {', '.join(missing_columns)}.")
+        return False
+
+    # Đổi tên cột theo mapping
+    df_mapped = df.rename(columns=column_mapping)
+    json_fields = list(column_mapping.values())
+    df_final = df_mapped[json_fields].copy()
+
+    # Xử lý cột 'year'
+    if 'year' in df_final.columns:
+        def process_year(year_value):
+            if pd.isna(year_value):
+                return None
+            year_str = str(year_value)
+            if year_str.isdigit():
+                return str(int(year_value))
+            else:
+                return year_str
+        df_final['year'] = df_final['year'].apply(process_year)
+        print("Đã xử lý cột 'year': chuyển thành chuỗi hoặc None.")
+
+    # Ghi file JSON
+    try:
+        with open(json_file_path, "w", encoding="utf-8") as f:
+            json.dump(df_final.to_dict(orient="records"), f, ensure_ascii=False, indent=4)
+        print(f"✅ Dữ liệu từ Google Sheet đã được chuyển sang JSON '{json_file_path}'.")
+        return True
+    except IOError as e:
+        print(f"Lỗi ghi file JSON: {e}")
+        return False
+
+if __name__ == "__main__":
+    # URL gốc Google Sheet (dạng "edit")
+    google_sheet_url = "https://docs.google.com/spreadsheets/d/1Rsdn321YuGaqp-mVt0YrCeMU73d-WzyZ4qtWm21LfD8/edit?gid=0#gid=0"
+
+    # Tùy chọn: sheet đầu tiên (mặc định là 0) hoặc tên sheet như "Books"
+    sheet_name = 0  # hoặc "Sheet1"
+
+    success = excel_url_to_json(
+        google_sheet_edit_url=google_sheet_url,
+        json_file_path="Books.json",
+        sheet_name=sheet_name
+    )
 
     if success:
         print("\nQuá trình chuyển đổi hoàn tất.")
