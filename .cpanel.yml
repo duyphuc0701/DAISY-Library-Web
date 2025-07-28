@@ -3,8 +3,8 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/sdytkgxn/public_html/
     - /bin/cp *.html $DEPLOYPATH
+    - /bin/cp *.json $DEPLOYPATH
     - /bin/cp sgaweg $DEPLOYPATH
-    - /bin/cp -R *.css $DEPLOYPATH
-    - /bin/cp -R *.jpg $DEPLOYPATH
+    - /bin/cp -R css $DEPLOYPATH
     - /bin/cp -R scripts $DEPLOYPATH
-    - /bin/cp -R image $DEPLOYPATH
+    - /bin/cp -R images $DEPLOYPATH
