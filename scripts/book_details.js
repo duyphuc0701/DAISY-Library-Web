@@ -53,26 +53,19 @@ function renderBookDetail(book) {
       errorMessage.classList.add("hidden");
       spinner.classList.remove("hidden");
 
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      try {
-        const url = downloadButton.getAttribute("data-url");
-        const head = await fetch(url, { method: "HEAD" });
-        if (!head.ok) throw new Error("File not found");
+      const url = downloadButton.getAttribute("data-url");
 
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      } catch (error) {
-        errorMessage.textContent = "Không tải được file. Vui lòng thử lại sau!";
-        errorMessage.classList.remove("hidden");
-        setTimeout(() => errorMessage.classList.add("hidden"), 2000);
-      } finally {
-        spinner.classList.add("hidden");
-      }
+      const a = document.createElement("a");
+      a.href = url;
+      a.target = "_blank"; // open in new tab (optional)
+      a.rel = "noopener noreferrer";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      spinner.classList.add("hidden");
     });
   }
 }
