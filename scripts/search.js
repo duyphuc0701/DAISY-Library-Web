@@ -1,4 +1,6 @@
 
+let deferInitialRender = true;
+
 /**
  * @param {string} pattern The pattern string.
  * @returns {Map<string, number>} A Map where keys are characters and values are their shift amounts.
@@ -113,7 +115,10 @@ document.addEventListener('DOMContentLoaded', () => {
             allBooks = await response.json();
             window.books = allBooks;
             populateCategories();
-            renderBookCards(allBooks);
+            if(deferInitialRender) {
+                console.log('Initial render deferred. Use filterAndRenderBooks() to display books.');
+                renderBookCards(allBooks);
+            }   
         } catch (error) {
             console.error('Lỗi khi tải dữ liệu sách:', error);
             noResultsMessage.textContent = 'Không thể tải dữ liệu sách. Vui lòng thử lại sau.';
@@ -157,9 +162,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     }
 
-    searchButton.addEventListener('click', () => {
-        currentSearchTerm = searchInput.value;
+    // Get search term from URL
+    const params = new URLSearchParams(window.location.search);
+    const term = params.get('search');
+    const categoryParam = params.get('category');
+
+    if (term) {
+        const input = document.getElementById('searchInput');
+        input.value = term;
+        currentSearchTerm = term;
+        deferInitialRender = false;
         filterAndRenderBooks();
+    }
+
+    if( categoryParam) {
+        const pageHeading = document.getElementById('pageHeading');
+        pageHeading.textContent = categoryParam;
+
+        currentCategory = categoryParam;
+        deferInitialRender = false;
+        filterAndRenderBooks();
+    }
+
+    searchButton.addEventListener('click', () => {
+        const term = searchInput.value.trim();
+        if (!term) return;
+
+        // Check if on index.html
+        const isOnIndex = window.location.pathname.includes('index.html') || window.location.pathname === '/' || window.location.pathname === '';
+
+        if (isOnIndex) {
+            currentSearchTerm = term;
+            filterAndRenderBooks();
+        } else {
+            // Redirect with query string
+            window.location.href = `index.html?search=${encodeURIComponent(term)}`;
+        }
     });
 
     searchInput.addEventListener('keypress', (event) => {
@@ -200,9 +238,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleCategoryClick(event) {
         event.preventDefault();
-        document.getElementById('pageHeading').textContent = event.target.textContent;
-        currentCategory = event.target.dataset.category;
-        filterAndRenderBooks();
+        const selectedCategory = event.target.dataset.category;
+
+        const isOnIndex = window.location.pathname.includes('index.html') ||
+                        window.location.pathname === '/' ||
+                        window.location.pathname === '';
+
+        if (isOnIndex) {
+            document.getElementById('pageHeading').textContent = selectedCategory;
+            currentCategory = selectedCategory;
+            filterAndRenderBooks();
+        } else {
+            // Redirect to index.html with category in query string
+            window.location.href = `index.html?category=${encodeURIComponent(selectedCategory)}`;
+        }
     }
 
     document.addEventListener('click', function (e) {
