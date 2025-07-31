@@ -94,4 +94,102 @@ async function loadBookAndRender() {
   }
 }
 
+function initalizeSwiper() {
+    const numberOfSlides = document.querySelector('.book-wrapper').children.length;
+    let swiper = new Swiper('.book-wrapper', {
+
+        direction: 'horizontal',
+        loop: true,
+        spaceBetween: 30,
+
+        // Pagination bullet
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+
+        },
+
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+
+        // Responsive breakpoints
+        breakpoints: {
+            // Điều kiện để tránh bị lỗi khi slide ít 
+            0: { slidesPerView: numberOfSlides > 0 ? 1 : numberOfSlides },
+            768: { slidesPerView: numberOfSlides > 1 ? 2 : numberOfSlides },
+            1024: { slidesPerView: numberOfSlides > 2 ? 3 : numberOfSlides },
+        }
+    });
+}
+
+async function renderBookCarousel(){
+  const bookCarousel = document.getElementById('bookCarousel');
+  bookCarousel.innerHTML = ''; // Clear existing content
+
+  try {
+    const response = await fetch("./books.json");
+    if (!response.ok) throw new Error("Network response was not ok");
+    const books = await response.json();
+    const bookID = getBookIdFromUrl();
+    const bookCategory = books.find(book => book.id === bookID).category;
+
+    console.log("Book ID:", bookID);
+    console.log("Book Category:", bookCategory); 
+
+    books.forEach(book => {
+      if (book.category === bookCategory && book.id !== bookID) {
+        const div = document.createElement("div");
+        div.className = "book-item swiper-slide";
+        div.innerHTML = `
+          <a href="book-detail.html?id=${book.id}" class="book-link">
+            <img src="${book.image}" alt="${book.title}" class="book-image">
+          </a>
+        `;
+        bookCarousel.appendChild(div);
+      }
+    });
+
+    // Khởi tạo Swiper sau khi sách đã được tải và thêm vào carousel
+    initalizeSwiper();
+
+  } catch (error) {
+    console.error("Lỗi khi tải sách:", error);
+    bookCarousel.innerHTML = '<div class="error-message">Không thể tải sách. Vui lòng thử lại sau.</div>';
+  }
+}
+
 document.addEventListener("DOMContentLoaded", loadBookAndRender);
+
+renderBookCarousel();
+
+// fetch("./books.json")
+//     .then ( response => {
+//         if ( !response.ok ) 
+//             throw new Error("Network response was not ok");
+//         return response.json();
+//     } )
+//     .then ( books => {
+//         const bookCarousel = document.getElementById('bookCarousel');
+//         books.forEach( book => {
+//             // if ( book.category === bookCategory && book.id !== bookID ) {
+//               const div = document.createElement("div");
+//               div.className = "book-item swiper-slide";
+//               div.innerHTML = `
+//                   <a href="book-detail.html?id=${book.id}" class="book-link">
+//                       <img src="${book.image}" alt="${book.title}" class="book-image">
+//                   </a>
+//               `;
+//               bookCarousel.appendChild(div);
+//             // }
+//         });
+        
+//         // Initialize Swiper after books are loaded
+//         initalizeSwiper();
+//     } )
+//     .catch( error => {
+//         console.error("Error loading books:", error);
+//         bookCarousel.innerHTML = '<div class="error-message">Failed to load books. Please try again later.</div>';
+//     } );
