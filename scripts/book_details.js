@@ -88,7 +88,8 @@ async function loadBookAndRender() {
 }
 
 function initalizeSwiper() {
-    const numberOfSlides = document.querySelector('.book-wrapper').children.length;
+    const numberOfSlides = document.querySelector('.book-wrapper').querySelectorAll('.swiper-slide').length;
+    console.log("Number of slides:", numberOfSlides);
     let swiper = new Swiper('.book-wrapper', {
 
         direction: 'horizontal',
@@ -99,7 +100,7 @@ function initalizeSwiper() {
         pagination: {
             el: '.swiper-pagination',
             clickable: true,
-
+            dynamicBullets: true,
         },
 
         // Navigation arrows
