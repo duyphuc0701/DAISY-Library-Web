@@ -6,17 +6,21 @@
     <!-- SwiperJS CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <meta charset="UTF-8" />
-    <title>Chi tiết sách</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="style_footer.css" />
+    <title>Chi tiết sách | Thư viện sách nói DAISY</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/style_footer.css" />
   </head>
   <body>
       <!-- HEADER -->
     <header class="site-header">
       <div class="top-bar">
-          <div class="logo">
-          <!-- replace with your logo -->
-          <img src="image/1.logo/logo_hsv.png" alt="Site Logo">
+          <div class="logo d-flex align-items-center">
+            <!-- Current logo -->
+            <img src="images/1.logo/logo_hsv.png" alt="Site Logo">
+
+            <!-- Favicon next to logo -->
+            <img src="images/favicon.png" alt="Favicon" style="height: 70px; margin-left: 10px;">
           </div>
           <div class="input-group w-100" style="max-width: 500px;">
             <input
@@ -96,6 +100,7 @@
     <script src="books.json"></script>
     <script src="scripts/qrcode.min.js" defer></script>
     <script src="scripts/book_details.js" defer></script>
+    <script src="scripts/search.js" defer></script>
     <div id="footer-placeholder"></div>
     <script>
       // Tải nội dung footer.html vào trang
